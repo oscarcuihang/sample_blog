@@ -1,0 +1,8 @@
+%h2= @blog.title
+%h5= display_sub_title(@blog)
+%p= @blog.content
+
+
+= link_to 'Edit', edit_blog_path(@blog)
+\|
+= link_to 'Back', blogs_path
