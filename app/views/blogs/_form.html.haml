@@ -1,0 +1,28 @@
+= form_for @blog do |f|
+  - if @blog.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@blog.errors.count, "error")} prohibited this blog from being saved:"
+      %ul
+        - @blog.errors.full_messages.each do |message|
+          %li= message
+  .form-horizontal
+    .form-group
+      .field
+        .col-sm-2.control-label
+          = f.label :title, 'Title'
+        .col-sm-10
+          = f.text_field :title, class: 'form-control'
+    .form-group
+      .field
+        .col-sm-2.control-label
+          = f.label :published, 'Is Published'
+        .col-sm-10
+          = f.check_box :published
+    .form-group
+      .field
+        .col-sm-2.control-label
+          = f.label :content, 'Content'
+        .col-sm-10
+          = f.text_area :content,rows: 15, class: 'form-control'
+    .actionsx
+      = f.submit 'Save', class: 'btn btn-primary'
