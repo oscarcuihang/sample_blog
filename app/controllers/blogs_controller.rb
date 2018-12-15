@@ -2,12 +2,11 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   def index
-    # binding.pry
     @blogs =
       if current_user && params[:user_blogs].present?
         Blog.where(user: current_user)
       else
-        Blog.published
+        Blog.search(search_param[:term])
       end
   end
 
@@ -48,10 +47,13 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.find_by(id: params[:id])
+    if @blog.nil
+      redirect_to blogs_path
+    end
   end
 
-  def search_parame
-    
+  def search_param
+    params.permit(:term)
   end
 
   def blog_params
