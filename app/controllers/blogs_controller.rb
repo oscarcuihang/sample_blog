@@ -25,8 +25,8 @@ class BlogsController < ApplicationController
     redirect_to @blog, notice: 'Login required before create new blog' if current_user.nil?
     @blog = Blog.new(blog_params)
     @blog.user = current_user
-    @blog.published_date = Time.now if blog_params[:published_date]
     if @blog.save!
+      BlogService::Publisher.new(blog_params[:published], blog_params[:published_date], @blog).publish
       redirect_to @blog, notice: 'Blog was successfully created.'
     else
       render :new
@@ -35,7 +35,7 @@ class BlogsController < ApplicationController
 
   def update
     if @blog.update(blog_params)
-      @blog.update(published_date: Time.now)
+      BlogService::Publisher.new(blog_params[:published], blog_params[:published_date], @blog).publish
       redirect_to @blog, notice: 'Blog was successfully updated.'
     else
       render :edit
@@ -59,6 +59,6 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.fetch(:blog, {}).permit(:title,:published,:content)
+    params.fetch(:blog, {}).permit(:title, :published, :content, :published_date)
   end
 end

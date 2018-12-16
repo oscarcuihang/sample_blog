@@ -6,7 +6,7 @@ class CreateBlogs < ActiveRecord::Migration[5.2]
       t.text :content
       t.boolean :published, null: false, default: false
       t.integer :view_count, null: false, default: 0
-      t.datetime :published_date, default: nil
+      t.date :published_date, default: nil
       t.timestamps
     end
   end

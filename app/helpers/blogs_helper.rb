@@ -40,11 +40,11 @@ module BlogsHelper
   def display_sub_title(blog)
     return unless blog
     return 'Unpublished' if blog.published_date.nil?
-    "#{blog.published_date.strftime('%F')} by #{blog.user.name}"
+    "#{blog.published_date.strftime} by #{blog.user.name}"
   end
 
   def display_published_date(date)
     return 'Unpublished' unless date
-    date.strftime('%F')
+    date.strftime
   end
 end
