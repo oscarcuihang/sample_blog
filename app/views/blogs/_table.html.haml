@@ -12,6 +12,6 @@
         %td= link_to blog.title, blog
         %td= blog.view_count
         %td= blog.user.name
-        %td= blog.published_date.strftime('%F')
+        %td= display_published_date(blog.published_date)
         %td= display_edit_button(blog)
         %td= display_delete_button(blog)
