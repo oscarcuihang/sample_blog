@@ -21,6 +21,12 @@
     .form-group
       .field
         .col-sm-2.control-label
+          = f.label :published_date, 'Published Date'
+        .col-sm-10
+          = date_field_tag :published_date, @blog.published_date
+    .form-group
+      .field
+        .col-sm-2.control-label
           = f.label :content, 'Content'
         .col-sm-10
           = f.text_area :content,rows: 15, class: 'form-control'

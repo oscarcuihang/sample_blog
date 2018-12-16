@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_181956) do
     t.text "content"
     t.boolean "published", default: false, null: false
     t.integer "view_count", default: 0, null: false
-    t.datetime "published_date"
+    t.date "published_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
