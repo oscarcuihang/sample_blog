@@ -11,7 +11,7 @@ class BlogsController < ApplicationController
   end
 
   def show
-    redirect_to blogs_url, notice: 'Blog not found' if @blog.nil?
+    BlogService::ViewCounter.new.plus(@blog)
   end
 
   def new
@@ -47,9 +47,7 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.find_by(id: params[:id])
-    if @blog.nil
-      redirect_to blogs_path
-    end
+    redirect_to blogs_url, notice: 'Blog not found' if @blog.nil?
   end
 
   def search_param
