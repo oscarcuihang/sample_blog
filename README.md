@@ -16,6 +16,7 @@ $ cd sample_blog
 
 $ bundle install
 (this will install all rails project dependencies)
+```
 
 ### Database initialization
 Database Setup
@@ -78,8 +79,6 @@ This file contains all Rails dependencies
 * Blog belongs to a single user
 * Blog has published indicator
 * Unauthorized user does not have access to blog
-
-### Screenshots
 
 ## How to run the test suite
 Test to be added in the future
