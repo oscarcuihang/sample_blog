@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :prevent_unauthorized_access, only: [:edit, :update, :destroy]
 
   def index
     @blogs =
@@ -11,6 +12,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    return redirect_to blogs_url, notice: 'Access Denied' if @blog.user != current_user && !@blog.published
     BlogService::ViewCounter.new.plus(@blog)
   end
 
@@ -48,6 +50,10 @@ class BlogsController < ApplicationController
   end
 
   private
+
+  def prevent_unauthorized_access
+    return redirect_to blogs_url, notice: 'Access Denied' if @blog.user != current_user
+  end
 
   def set_blog
     @blog = Blog.find_by(id: params[:id])
